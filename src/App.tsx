@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppState } from "./store";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { SystemState } from "./store/system/types";
+import { updateSession } from "./store/system/actions";
+
+import { ChatState } from "./store/chat/types";
+import { sendMessage } from "./store/chat/actions";
+
+interface AppProps {
+  sendMessage: typeof sendMessage;
+  updateSession: typeof updateSession;
+  chat: ChatState;
+  system: SystemState;
 }
 
+const mapStateToProps = (state: AppState) => ({
+  system: state.system,
+  chat: state.chat,
+});
+
+const App: React.FC<AppProps> = ({ system, chat }) => {};
 export default App;
